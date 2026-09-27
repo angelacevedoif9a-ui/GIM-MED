@@ -1,0 +1,49 @@
+<!doctype html>
+
+<!-- Pantalla para la interfaz de administrador, tarea recursos humanos: navegación, formularios y paneles de esta tarea. -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Administración de expedientes laborales de GIM-MED">
+  <title>Recursos Humanos | GIM-MED</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside id="app-sidebar" class="sidebar" aria-label="Navegación principal"></aside>
+    <main class="main-area">
+      <header id="app-header" class="topbar"></header>
+      <section class="content">
+        <nav class="tab-list" aria-label="Áreas de Recursos Humanos"><button class="tab active" data-tab="staff" type="button">Expedientes laborales</button><button class="tab" data-tab="users" type="button">Usuarios y accesos</button></nav>
+        <section id="staff-tab">
+        <div class="page-heading">
+          <div><p class="eyebrow">GESTIÓN DEL TALENTO</p><h1 id="page-title"></h1><p id="page-description"></p></div>
+          <div class="button-row"><button id="print" class="secondary-button" type="button">Descargar PDF</button><button id="new-record" class="primary-button" type="button">+ Nuevo empleado</button></div>
+        </div>
+        <section id="form-panel" class="panel" hidden>
+          <h2 id="form-title">Nuevo empleado</h2>
+          <p class="helper-text">Todos los campos son obligatorios. El ID, documento, correo y teléfono deben ser únicos.</p>
+          <form id="record-form" novalidate>
+            <div id="form-fields" class="form-grid"></div>
+            <p id="form-error" class="form-error" role="alert"></p>
+            <div class="form-actions"><button id="cancel-form" type="button" class="secondary-button">Cancelar</button><button class="primary-button" type="submit">Guardar expediente</button></div>
+          </form>
+        </section>
+        <div class="toolbar"><input id="search" type="search" placeholder="Buscar por empleado, cargo o departamento..." aria-label="Buscar empleados"><button id="sync-payroll" class="secondary-button" type="button">Sincronizar con planilla</button></div>
+        <div class="table-wrap"><table><thead id="record-head"></thead><tbody id="record-body"></tbody></table></div>
+        </section>
+        <section id="users-tab" hidden>
+          <div class="page-heading"><div><p class="eyebrow">CONTROL ADMINISTRATIVO</p><h1>Usuarios del sistema</h1><p>Solo el administrador puede registrar contraseñas, asignar roles y controlar el acceso.</p></div><button id="new-user" class="primary-button" type="button">+ Nuevo usuario</button></div>
+          <article id="user-restricted" class="panel restricted" hidden><h2>Acceso restringido</h2><p>Únicamente el administrador puede administrar las cuentas del sistema.</p></article>
+          <section id="user-form-panel" class="panel" hidden><h2 id="user-form-title">Registrar usuario</h2><form id="user-form" novalidate><div class="form-grid"><label>Nombre completo *<input name="name" required></label><label>Usuario del sistema *<input name="username" pattern="[a-zA-Z0-9._-]+" minlength="4" required></label><label>Correo del empleado *<input name="email" type="email" required></label><label>Contraseña temporal *<input name="password" type="password" minlength="8" required></label><label>Rol del sistema *<select name="role" required><option>Médico</option><option>Enfermería</option><option>Farmacéutico</option><option>Personal administrativo</option></select></label><label>Estado de acceso *<select name="status" required><option>Activo</option><option>Inactivo</option><option>Bloqueado</option></select></label></div><p class="helper-text">La sesión administrativa actual autoriza el registro; no es necesario volver a escribir la contraseña del administrador.</p><p id="user-error" class="form-error" role="alert"></p><div class="form-actions"><button id="cancel-user" class="secondary-button" type="button">Cancelar</button><button class="primary-button" type="submit">Guardar usuario</button></div></form></section>
+          <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Usuario</th><th>Correo</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="users-body"></tbody></table></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="/bootstrap.js"></script><script src="../core/store.js"></script>
+  <script src="../core/crud.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

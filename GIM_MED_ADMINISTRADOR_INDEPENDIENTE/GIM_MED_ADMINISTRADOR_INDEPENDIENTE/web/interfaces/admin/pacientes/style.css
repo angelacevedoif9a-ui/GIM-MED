@@ -1,0 +1,59 @@
+@import url("../style.css");
+
+
+/* Apariencia de la interfaz de administrador, tarea pacientes: diseño, componentes y ajustes de pantalla. */
+.patient-workspace { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 22px; align-items: start; }
+.patient-list { position: sticky; top: 94px; padding: 18px; max-height: calc(100vh - 120px); overflow: auto; }
+.search-label { margin: 0 0 14px; }
+.patient-items { display: grid; gap: 8px; }
+.patient-item { width: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: #fff; text-align: left; cursor: pointer; transition: .2s; }
+.patient-item:hover, .patient-item.active { border-color: var(--teal); background: #ecfdf9; transform: translateY(-1px); }
+.patient-item strong, .patient-item small { display: block; }
+.patient-item small { margin-top: 4px; color: var(--muted); }
+.clinical-column, #patient-view { display: grid; gap: 18px; }
+.patient-summary { display: flex; align-items: center; gap: 16px; padding: 22px; }
+.patient-avatar { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; flex: 0 0 auto; background: linear-gradient(135deg, var(--teal), #2563eb); color: #fff; font-weight: 900; font-size: 1.25rem; }
+.patient-summary h2, .patient-summary p { margin: 2px 0; }
+.record-code { color: var(--teal-dark); font-size: .78rem; font-weight: 900; letter-spacing: .09em; }
+.summary-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.clinical-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.clinical-card { min-height: 112px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+.clinical-card small, .clinical-card strong { display: block; }
+.clinical-card small { color: var(--muted); font-weight: 800; }
+.clinical-card strong { margin-top: 14px; color: var(--navy); line-height: 1.35; }
+
+/* Mensajes y avisos de la interfaz de administrador, tarea pacientes. */
+.alert-card { border-color: #fecaca; background: #fff7f7; }
+.alert-card strong { color: #b91c1c; }
+.clinical-details, .diagnosis-section { padding: 22px; }
+.section-title { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 18px; }
+.section-title h2 { margin: 2px 0 0; }
+.detail-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; }
+.detail-grid div { padding: 14px; border-radius: 12px; background: var(--surface-soft); }
+.detail-grid dt { color: var(--muted); font-size: .75rem; font-weight: 900; text-transform: uppercase; }
+.detail-grid dd { margin: 6px 0 0; color: var(--navy); overflow-wrap: anywhere; }
+.timeline { display: grid; gap: 14px; }
+.timeline-item { position: relative; padding: 18px 18px 18px 26px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+.timeline-item::before { content: ""; position: absolute; top: 18px; bottom: 18px; left: 10px; width: 4px; border-radius: 4px; background: var(--teal); }
+.timeline-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.timeline-item h3 { margin: 5px 0; }
+.timeline-meta { color: var(--muted); font-size: .85rem; }
+.diagnosis-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.diagnosis-grid p { margin: 0; padding: 10px; background: var(--surface-soft); border-radius: 10px; white-space: pre-wrap; }
+.modal-dialog { width: min(1100px, calc(100% - 28px)); max-height: 92vh; padding: 0; border: 0; border-radius: 20px; box-shadow: 0 30px 90px #001e3566; }
+.modal-dialog::backdrop { background: #052a3fcc; backdrop-filter: blur(3px); }
+
+/* Formularios y campos de la interfaz de administrador, tarea pacientes. */
+.modal-dialog form { padding: 24px; }
+.modal-header { position: sticky; top: -24px; z-index: 2; display: flex; justify-content: space-between; align-items: center; margin: -24px -24px 20px; padding: 20px 24px; border-bottom: 1px solid var(--line); background: #fff; }
+.modal-header h2 { margin: 2px 0 0; }
+.icon-button { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 12px; background: #fff; font-size: 1.5rem; cursor: pointer; }
+fieldset { margin: 0 0 22px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; }
+legend { padding: 0 8px; color: var(--navy); font-weight: 900; }
+.modal-dialog .form-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.diagnosis-dialog .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Adaptación a otras pantallas de la interfaz de administrador, tarea pacientes. */
+@media (max-width: 1050px) { .patient-workspace { grid-template-columns: 1fr; } .patient-list { position: static; max-height: 330px; } .clinical-cards { grid-template-columns: repeat(2, 1fr); } .detail-grid, .modal-dialog .form-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 680px) { .patient-summary, .section-title { align-items: flex-start; flex-direction: column; } .summary-actions { margin-left: 0; } .clinical-cards, .detail-grid, .modal-dialog .form-grid, .diagnosis-dialog .form-grid, .diagnosis-grid { grid-template-columns: 1fr; } }
+@media print { .patient-list, .page-heading, .summary-actions, #new-diagnosis, .sidebar, .topbar { display: none !important; } .main-area { margin: 0 !important; } .patient-workspace { display: block; } #patient-view { display: grid !important; } }
