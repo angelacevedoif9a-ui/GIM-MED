@@ -1,0 +1,340 @@
+<!doctype html>
+
+<!-- Pantalla para la interfaz de enfermería: navegación, formularios y paneles de esta tarea. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GIM-MED Enfermería</title>
+  <link rel="stylesheet" href="static/css/enfermera.css">
+  <link rel="stylesheet" href="static/css/modulos/inicio.css">
+  <link rel="stylesheet" href="static/css/modulos/expediente.css">
+  <link rel="stylesheet" href="static/css/modulos/signos.css">
+  <link rel="stylesheet" href="static/css/modulos/medicamentos.css">
+  <link rel="stylesheet" href="static/css/modulos/procedimientos.css">
+  <link rel="stylesheet" href="static/css/modulos/hospitalizacion.css">
+  <link rel="stylesheet" href="static/css/modulos/seguimiento.css">
+  <link rel="stylesheet" href="static/css/modulos/notificaciones.css">
+  <link rel="stylesheet" href="static/css/modulos/configuracion.css">
+<style>.extra-nav{display:block;width:90%;margin:8px auto;padding:10px;border:0;border-radius:9px;text-align:left;text-decoration:none;color:#fff;background:#157b80;font:inherit;cursor:pointer}</style></head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><img src="static/img/logo-gimmed.jpeg" alt="Logo GIM-MED"><div><b>GIM-MED</b><span>Gestión clínica</span></div></div>
+  <p>MENÚ PRINCIPAL</p>
+  <nav>
+    <button data-view="inicio" class="active">⌂ Inicio</button><button data-view="expediente">▣ Expediente clínico</button>
+    <button data-view="signos">♡ Signos vitales</button><button data-view="medicamentos">◉ Medicamentos</button>
+    <button data-view="procedimientos">✚ Procedimientos</button><button data-view="hospitalizacion">▤ Hospitalización</button>
+    <button data-view="seguimiento">↗ Seguimiento</button><button data-view="notificaciones">♢ Notificaciones <i id="badge">0</i></button>
+    <button data-view="configuracion">⚙ Configuración</button>
+  </nav><a class="extra-nav" href="/registrar-paciente">＋ Registrar paciente</a><a class="extra-nav" href="/registrar-medicamento">＋ Registrar medicamento</a><button class="extra-nav" id="logout-button">Cerrar sesión</button>
+  <div class="shift"><i></i><div><b>Turno activo</b><small>07:00 a. m. – 03:00 p. m.</small></div></div>
+</aside>
+<main>
+  <header><div><small>Clínica Privada Osorio</small><b id="pageName">Inicio</b></div><div class="header-actions"><button data-view="notificaciones" class="bell">♢<i id="topBadge">0</i></button><button data-view="configuracion" class="profile"><img id="profilePhoto" src="static/img/nurse-profile-default.webp" alt="Fotografía de perfil"><span><b id="profileName">Enf. Elena Álvarez</b><small id="profileRole">Enfermera general</small></span></button></div></header>
+  <div class="content">
+    <!-- Módulo Inicio: resumen y accesos rápidos de enfermería. -->
+<section id="inicio" class="view active">
+  <div class="welcome">
+    <p>MÓDULO DE ENFERMERÍA</p>
+    <h1 id="welcomeName">Buenos días, Elena</h1>
+    <span>Gestiona a tus pacientes desde un solo lugar.</span>
+  </div>
+  <div class="stats">
+    <article><b id="dashboardPatients">3</b><span>Pacientes registrados</span></article>
+    <article><b id="dashboardVitals">0</b><span>Signos hoy</span></article>
+    <article><b id="dashboardHospitalized">2</b><span>Hospitalizados</span></article>
+    <article><b id="dashboardBeds">2</b><span>Camas disponibles</span></article>
+  </div>
+  <article class="panel">
+    <h2>Tareas frecuentes</h2>
+    <div class="task-grid">
+      <button data-view="expediente">Buscar expediente</button>
+      <button data-view="signos">Registrar signos vitales</button>
+      <button data-view="medicamentos">Administrar medicamento</button>
+      <button data-view="procedimientos">Registrar procedimiento</button>
+      <button data-view="hospitalizacion">Asignar habitación</button>
+      <button data-view="seguimiento">Monitorear paciente</button>
+    </div>
+  </article>
+</section>
+
+    <!-- Módulo Expediente clínico: consulta completa en modo de solo lectura. -->
+<section id="expediente" class="view">
+  <div class="title">
+    <h1>Expediente clínico</h1>
+    <p>Busca por expediente, identificación o nombre y consulta la información clínica completa.</p>
+  </div>
+  <article class="panel">
+    <div class="search-row">
+      <input id="recordSearch" placeholder="EXP-2026-001, identificación o nombre">
+      <button id="recordSearchButton">Buscar paciente</button>
+    </div>
+    <div id="recordResult" class="record-result empty">Ingresa los datos del paciente para consultar su expediente.</div>
+  </article>
+  <div id="completeRecord"></div>
+</section>
+
+    <!-- Módulo Signos vitales: registro clínico validado e IMC automático. -->
+<section id="signos" class="view">
+  <div class="title">
+    <h1>Registrar signos vitales</h1>
+    <p>Busca al paciente por expediente o nombre y registra las mediciones verificadas.</p>
+  </div>
+  <article class="panel">
+    <form id="vitalsForm" class="clinical-form" data-module="signos">
+      <h2>Identificación del paciente</h2>
+      <div class="patient-field" data-allow-name="true"></div>
+      <div class="system-stamp combined"></div>
+      <div class="form-section">
+        <h2>Signos vitales</h2>
+        <div class="grid four">
+          <label>Temperatura °C *<input name="temperatura" type="number" min="30" max="45" step=".1" required></label>
+          <label>Presión sistólica (mmHg) *<input name="presion_sistolica" type="number" min="60" max="250" required></label>
+          <label>Presión diastólica (mmHg) *<input name="presion_diastolica" type="number" min="30" max="150" required></label>
+          <label>Frecuencia cardíaca (lpm) *<input name="frecuencia_cardiaca" type="number" min="20" max="250" required></label>
+          <label>Frecuencia respiratoria (rpm) *<input name="frecuencia_respiratoria" type="number" min="5" max="80" required></label>
+          <label>Saturación O₂ % *<input name="saturacion" type="number" min="50" max="100" required></label>
+          <label class="pain-field">Dolor: <b><output id="painValue">0</output>/10</b><input id="painInput" name="dolor" type="range" min="0" max="10" value="0"><small>0 = sin dolor · 10 = máximo dolor</small></label>
+        </div>
+        <div class="oxygen-box">
+          <label class="check-line"><input id="oxygenToggle" name="oxigeno_suplementario" type="checkbox" value="Sí"> El paciente utiliza oxígeno suplementario</label>
+          <label id="oxygenFlow" hidden>Flujo de oxígeno (L/min) *<input name="litros_oxigeno" type="number" min="0.1" max="60" step="0.1" placeholder="2.0"></label>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Mediciones complementarias</h2>
+        <div class="grid four">
+          <label>Glucosa (mg/dL) *<input name="glucosa" type="number" min="20" max="600" required></label>
+          <label>Peso (kg) *<input id="weightInput" name="peso" type="number" min="1" max="400" step=".1" required></label>
+          <label>Talla (cm) *<input id="heightInput" name="talla" type="number" min="30" max="250" step=".1" required></label>
+          <label>IMC calculado (kg/m²)<input id="bmiInput" name="imc" readonly placeholder="Se calcula automáticamente" required></label>
+        </div>
+      </div>
+      <div class="nurse-card"></div>
+      <label>Observaciones<textarea name="observaciones"></textarea></label>
+      <div class="form-actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button class="primary">Guardar signos vitales</button>
+      </div>
+    </form>
+  </article>
+</section>
+
+    <!-- Módulo Medicamentos: búsqueda y administración múltiple sin duplicidad. -->
+<section id="medicamentos" class="view">
+  <div class="title">
+    <h1>Gestión de medicamentos</h1>
+    <p>Agrega uno o varios medicamentos y documenta cada dosis, vía y frecuencia.</p>
+  </div>
+  <article class="panel medication-layout">
+    <div>
+      <label>Buscar medicamento<input id="medicineSearch" placeholder="Código, nombre, presentación o vía"></label>
+      <small id="medicineCount"></small>
+      <div id="medicineResults" class="medicine-results"></div>
+      <div id="patientAllergy" class="warning">
+        <b>Alergias del paciente</b>
+        <span>Selecciona al paciente para consultar sus alergias registradas.</span>
+      </div>
+    </div>
+    <form id="medicationForm" class="clinical-form" data-module="medicamentos">
+      <div class="patient-field"></div>
+      <label>Prescripción *<input name="prescripcion" pattern="RX-[0-9]{4}-[0-9]{3}" placeholder="RX-2026-001" required></label>
+      <div class="selected-medicines">
+        <div class="selected-title"><b>Medicamentos a administrar</b><span id="selectedMedicineCount">0 agregados</span></div>
+        <div id="selectedMedicines"><div class="record-result empty">Selecciona uno o varios medicamentos desde el panel.</div></div>
+      </div>
+      <div class="system-stamp combined"></div>
+      <div class="nurse-card"></div>
+      <div class="checks">
+        <label><input type="checkbox" required> Identidad verificada</label>
+        <label><input type="checkbox" required> Prescripción vigente verificada</label>
+        <label><input type="checkbox" required> Alergias revisadas</label>
+        <label><input type="checkbox" required> Medicamentos, dosis, vías y horario verificados</label>
+      </div>
+      <label>Observaciones<textarea name="observaciones"></textarea></label>
+      <div class="form-actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button class="primary">Registrar administración</button>
+      </div>
+    </form>
+  </article>
+</section>
+
+    <!-- Módulo Procedimientos: documentación de la atención realizada. -->
+<section id="procedimientos" class="view">
+  <div class="title">
+    <h1>Procedimientos de enfermería</h1>
+    <p>Documenta la atención y su resultado.</p>
+  </div>
+  <article class="panel">
+    <form id="procedureForm" class="clinical-form" data-module="procedimientos">
+      <div class="patient-field"></div>
+      <div class="system-stamp"></div>
+      <div class="nurse-card"></div>
+      <div class="grid two">
+        <label>Código *<input name="codigo" pattern="PROC-[0-9]{3}" placeholder="PROC-001" required></label>
+        <label>Procedimiento *<input name="procedimiento" required></label>
+        <label>Estado *<select name="estado" required><option value="">Seleccione</option><option>Estable</option><option>En observación</option><option>Delicado</option><option>Crítico</option></select></label>
+        <label>Resultado *<textarea name="resultado" required></textarea></label>
+      </div>
+      <div class="form-actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button class="primary">Guardar procedimiento</button>
+      </div>
+    </form>
+  </article>
+</section>
+
+    <!-- Módulo Hospitalización: ocupación de camas, visitas, traslados y alta. -->
+<section id="hospitalizacion" class="view">
+  <div class="title">
+    <h1>Hospitalización</h1>
+    <p>Gestiona el ciclo de ocupación de camas, visitas, traslados y alta autorizada.</p>
+  </div>
+  <article class="panel hospital-layout">
+    <form id="hospitalForm" class="clinical-form" data-module="hospitalizacion">
+      <div class="patient-field"></div>
+      <div class="grid two">
+        <label>Habitación y cama *<select id="hospitalBedSelect" name="cama" required><option value="">Seleccione una cama disponible</option></select></label>
+        <label>Estado *<select name="estado" required><option>Estable</option><option>En observación</option><option>Delicado</option><option>Crítico</option></select></label>
+      </div>
+      <div class="system-stamp combined"></div>
+      <div class="nurse-card"></div>
+      <label>Observaciones de ingreso *<textarea name="observaciones" required></textarea></label>
+      <div class="form-actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button class="primary">Registrar ingreso y ocupar cama</button>
+      </div>
+    </form>
+    <div>
+      <h2>Control hospitalario</h2>
+      <div id="bedSummary" class="bed-summary"><b>Cargando disponibilidad…</b><span>Consulta de ocupación en tiempo real</span></div>
+      <p class="bed-help">Selecciona una cama ocupada para cargar al paciente asignado.</p>
+      <div id="hospitalBedGrid" class="bed-grid"></div>
+      <div class="control-grid">
+        <button type="button" data-hospital-action="medicamento"><b>Administrar medicamento</b><span>Registra dosis y horario</span></button>
+        <button type="button" data-hospital-action="visita"><b>Registrar visita</b><span>Controla visitante y observaciones</span></button>
+        <button type="button" data-hospital-action="traslado"><b>Registrar traslado</b><span>Documenta origen, destino y motivo</span></button>
+        <button type="button" data-hospital-action="alta"><b>Solicitar alta médica</b><span>Libera la cama con autorización médica</span></button>
+      </div>
+    </div>
+  </article>
+</section>
+
+<div id="hospitalModal" class="modal-backdrop" hidden>
+  <section class="action-modal" role="dialog" aria-modal="true">
+    <div class="modal-heading">
+      <div><small>CONTROL HOSPITALARIO</small><h2 id="hospitalModalTitle"></h2></div>
+      <button id="closeHospitalModal" type="button">×</button>
+    </div>
+    <div id="hospitalModalPatient" class="modal-patient"></div>
+    <form id="hospitalActionForm" class="clinical-form">
+      <input id="hospitalActionModule" name="modulo" type="hidden">
+      <input id="hospitalPatientId" name="expediente" type="hidden">
+      <div id="hospitalActionFields"></div>
+      <div class="system-stamp combined"></div>
+      <div class="nurse-card"></div>
+      <div class="form-actions">
+        <button id="cancelHospitalModal" type="button" class="secondary">Cancelar</button>
+        <button class="primary">Guardar</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+    <!-- Módulo Seguimiento: evolución, cumplimiento y próxima cita. -->
+<section id="seguimiento" class="view">
+  <div class="title">
+    <h1>Seguimiento y evolución</h1>
+    <p>Registra evolución, tratamiento y próxima cita.</p>
+  </div>
+  <article class="panel">
+    <form id="followUpForm" class="clinical-form" data-module="seguimiento">
+      <div class="patient-field"></div>
+      <div class="system-stamp"></div>
+      <div class="nurse-card"></div>
+      <div class="grid two">
+        <label>Estado *<select name="estado" required><option>Estable</option><option>En observación</option><option>Delicado</option><option>Crítico</option></select></label>
+        <label>Evolución *<select name="evolucion" required><option>Mejoría favorable</option><option>Sin cambios</option><option>Presenta deterioro</option></select></label>
+        <label>Cumplimiento *<select name="cumplimiento" required><option>Completo</option><option>Parcial</option><option>No cumplido</option></select></label>
+        <label>Próxima cita<input name="cita_control" type="date"></label>
+      </div>
+      <label>Observaciones clínicas *<textarea name="observaciones" required></textarea></label>
+      <div class="form-actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button class="primary">Guardar seguimiento</button>
+      </div>
+    </form>
+  </article>
+</section>
+
+    <!-- Módulo Notificaciones: alertas clínicas y pendientes. -->
+<section id="notificaciones" class="view">
+  <div class="title">
+    <h1>Notificaciones</h1>
+    <p>Alertas clínicas y tareas pendientes.</p>
+  </div>
+  <div id="notificationList"></div>
+</section>
+
+    <!-- Módulo Configuración: apariencia, fotografía, perfil y contraseña. -->
+<section id="configuracion" class="view">
+  <div class="title">
+    <h1>Configuración</h1>
+    <p>Apariencia, fotografía, perfil y seguridad.</p>
+  </div>
+  <div class="settings">
+    <article class="panel">
+      <h2>Apariencia</h2>
+      <div class="themes"><button data-theme-choice="light">☀ Claro</button><button data-theme-choice="dark">☾ Oscuro</button></div>
+    </article>
+    <article class="panel">
+      <h2>Perfil profesional</h2>
+      <div class="photo-editor">
+        <img id="photoPreview" src="static/img/nurse-profile-default.webp" alt="Vista previa">
+        <label class="upload">Cambiar fotografía<input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp"></label>
+        <small>JPG, PNG o WEBP · máximo 1 MB</small>
+      </div>
+      <form id="profileForm">
+        <div class="grid two">
+          <label>Nombre *<input name="nombre" required></label>
+          <label>Correo *<input name="email" type="email" required></label>
+          <label>Teléfono *<input name="telefono" pattern="[0-9]{4}-[0-9]{4}" required></label>
+          <label>Licencia *<input name="licencia" pattern="MINSA-ENF-[0-9]{4}" required></label>
+        </div>
+        <button class="primary">Guardar perfil</button>
+      </form>
+    </article>
+    <article class="panel">
+      <h2>Cambiar contraseña</h2>
+      <form id="passwordForm">
+        <label>Contraseña actual *<input name="actual" type="password" required></label>
+        <div class="grid two">
+          <label>Nueva contraseña *<input name="nueva" type="password" minlength="8" required></label>
+          <label>Confirmar *<input name="confirmar" type="password" minlength="8" required></label>
+        </div>
+        <small>Debe incluir mayúscula, minúscula, número y símbolo.</small>
+        <button class="primary">Actualizar contraseña</button>
+      </form>
+    </article>
+  </div>
+</section>
+
+  </div>
+</main>
+<div id="toast" role="status"></div>
+<script src="static/js/common.js"></script>
+<script src="static/js/modulos/inicio.js"></script>
+<script src="static/js/modulos/expediente.js"></script>
+<script src="static/js/modulos/signos.js"></script>
+<script src="static/js/modulos/medicamentos.js"></script>
+<script src="static/js/modulos/procedimientos.js"></script>
+<script src="static/js/modulos/hospitalizacion.js"></script>
+<script src="static/js/modulos/seguimiento.js"></script>
+<script src="static/js/modulos/notificaciones.js"></script>
+<script src="static/js/modulos/configuracion.js"></script>
+<script>
+// Eventos, consultas y actualización de la interfaz de enfermería.
+(function(){/** Controla la visualización o navegación de la interfaz de enfermería. */
+function openView(view){document.querySelector('[data-view="'+view+'"]')?.click()}window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='gimmed-actor-navigation')openView(e.data.view)});openView(new URLSearchParams(location.search).get('view')||sessionStorage.getItem('gimmed:active-view')||'inicio')})();</script><script>document.querySelector("#logout-button").onclick=async()=>{await fetch("/api/logout",{method:"POST"});location.href="/"}</script></body></html>
+

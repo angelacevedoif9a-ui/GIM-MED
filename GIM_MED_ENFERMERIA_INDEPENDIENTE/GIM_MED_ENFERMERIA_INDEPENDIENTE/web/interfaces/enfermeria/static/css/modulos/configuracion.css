@@ -1,0 +1,26 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Configuración: tema, fotografía, perfil y seguridad de la cuenta. */
+#configuracion .photo-editor img {
+  object-fit: cover;
+}
+#configuracion .themes button.selected {
+  outline: 3px solid color-mix(in srgb, var(--green) 35%, transparent);
+}
+
+/* Formularios y campos de la interfaz de enfermería. */
+#configuracion form {
+  display: grid;
+  gap: 15px;
+}
+#configuracion #passwordForm small {
+  color: var(--muted);
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 700px) {
+  #configuracion .settings,
+  #configuracion .grid.two {
+    grid-template-columns: 1fr;
+  }
+}

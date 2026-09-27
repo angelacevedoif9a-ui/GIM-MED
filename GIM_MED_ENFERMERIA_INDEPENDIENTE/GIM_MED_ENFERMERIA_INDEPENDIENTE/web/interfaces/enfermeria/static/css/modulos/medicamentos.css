@@ -1,0 +1,26 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Medicamentos: buscador, selección múltiple y verificación de alergias. */
+#medicamentos .medicine-results {
+  scrollbar-color: var(--green) transparent;
+}
+#medicamentos .medicine-item {
+  width: 100%;
+  text-align: left;
+}
+#medicamentos .selected-medicines {
+  min-width: 0;
+}
+#medicamentos .medication-card {
+  animation: medicine-in 0.18s ease;
+}
+
+@keyframes medicine-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

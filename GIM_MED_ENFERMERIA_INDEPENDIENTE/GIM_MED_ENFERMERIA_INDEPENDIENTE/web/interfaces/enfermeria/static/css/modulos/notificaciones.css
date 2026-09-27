@@ -1,0 +1,28 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Notificaciones: alertas clínicas y estado de lectura. */
+#notificaciones #notificationList {
+  display: grid;
+  gap: 12px;
+}
+
+/* Mensajes y avisos de la interfaz de enfermería. */
+#notificaciones .notification {
+  transition:
+    border-color 0.18s ease,
+    opacity 0.18s ease;
+}
+#notificaciones .notification.read {
+  opacity: 0.72;
+}
+#notificaciones .notification button {
+  white-space: nowrap;
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 580px) {
+  #notificaciones .notification {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

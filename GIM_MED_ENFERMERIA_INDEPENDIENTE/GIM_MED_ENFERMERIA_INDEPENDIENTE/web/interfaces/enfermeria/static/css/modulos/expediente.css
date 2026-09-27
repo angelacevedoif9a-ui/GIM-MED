@@ -1,0 +1,28 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Expediente: consulta completa y tarjetas verticales del historial clínico. */
+#expediente .search-row {
+  align-items: stretch;
+}
+#expediente #completeRecord {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+#expediente .vitals-history-list {
+  display: grid;
+  gap: 12px;
+}
+#expediente .vital-history-card {
+  min-width: 0;
+}
+#expediente .vital-history-card-grid {
+  overflow: hidden;
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 580px) {
+  #expediente .search-row {
+    grid-template-columns: 1fr;
+  }
+}

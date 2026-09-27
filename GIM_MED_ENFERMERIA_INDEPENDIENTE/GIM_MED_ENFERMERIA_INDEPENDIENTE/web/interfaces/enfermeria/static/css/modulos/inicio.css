@@ -1,0 +1,26 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Inicio: bienvenida, indicadores y accesos directos. */
+#inicio .welcome {
+  min-height: 180px;
+}
+#inicio .stats article {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+#inicio .stats article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(8, 72, 126, 0.09);
+}
+#inicio .task-grid button {
+  min-height: 64px;
+  text-align: left;
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 640px) {
+  #inicio .welcome {
+    min-height: 150px;
+  }
+}

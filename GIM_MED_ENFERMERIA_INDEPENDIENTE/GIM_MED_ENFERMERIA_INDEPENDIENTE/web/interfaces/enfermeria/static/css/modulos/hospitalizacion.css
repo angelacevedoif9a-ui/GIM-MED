@@ -1,0 +1,28 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Hospitalización: disponibilidad, ocupación, visitas, traslados y alta. */
+#hospitalizacion .bed-status {
+  min-width: 0;
+}
+#hospitalizacion .bed-status.ocupada {
+  border-left: 4px solid #e55a64;
+}
+#hospitalizacion .bed-status.disponible {
+  border-left: 4px solid var(--green);
+}
+#hospitalizacion .control-grid button {
+  min-height: 82px;
+}
+#hospitalModal .action-modal {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 700px) {
+  #hospitalizacion .hospital-layout,
+  #hospitalizacion .bed-grid,
+  #hospitalizacion .control-grid {
+    grid-template-columns: 1fr;
+  }
+}

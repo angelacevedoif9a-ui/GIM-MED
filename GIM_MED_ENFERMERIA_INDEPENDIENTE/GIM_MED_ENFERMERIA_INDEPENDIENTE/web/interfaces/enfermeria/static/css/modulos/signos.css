@@ -1,0 +1,26 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Signos vitales: mediciones clínicas, dolor, oxígeno e IMC. */
+
+/* Formularios y campos de la interfaz de enfermería. */
+#signos .form-section {
+  scroll-margin-top: 90px;
+}
+#signos .pain-field output {
+  color: var(--blue);
+  font-size: 18px;
+}
+#signos #bmiInput[readonly] {
+  cursor: not-allowed;
+  font-weight: 800;
+}
+#signos .oxygen-box:has(#oxygenToggle:checked) {
+  border-color: var(--green);
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 700px) {
+  #signos .grid.four {
+    grid-template-columns: 1fr;
+  }
+}

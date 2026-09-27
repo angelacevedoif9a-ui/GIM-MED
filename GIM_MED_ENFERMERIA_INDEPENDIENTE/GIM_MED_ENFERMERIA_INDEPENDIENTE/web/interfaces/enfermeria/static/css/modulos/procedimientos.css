@@ -1,0 +1,23 @@
+/* Apariencia de la interfaz de enfermería: diseño, componentes y ajustes de pantalla. */
+/* Procedimientos: formulario de atención y resultado clínico. */
+
+/* Tarjetas y paneles de la interfaz de enfermería. */
+#procedimientos .panel {
+  max-width: 1100px;
+}
+#procedimientos textarea[name="resultado"] {
+  min-height: 110px;
+}
+
+/* Formularios y campos de la interfaz de enfermería. */
+#procedimientos .form-actions {
+  margin-top: 4px;
+}
+
+/* Adaptación a otras pantallas de la interfaz de enfermería. */
+
+@media (max-width: 700px) {
+  #procedimientos .grid.two {
+    grid-template-columns: 1fr;
+  }
+}
