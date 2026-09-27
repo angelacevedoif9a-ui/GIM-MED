@@ -1,0 +1,15 @@
+<!doctype html>
+
+<!-- Pantalla para la interfaz de administrador, tarea citas: navegación, formularios y paneles de esta tarea. -->
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Agenda médica de GIM-MED"><title>Citas médicas | GIM-MED</title><link rel="stylesheet" href="style.css"></head>
+<body>
+  <div class="app"><aside id="app-sidebar" class="sidebar" aria-label="Navegación principal"></aside><main class="main-area"><header id="app-header" class="topbar"></header><section class="content">
+    <div class="page-heading"><div><p class="eyebrow">AGENDA CLÍNICA</p><h1 id="page-title"></h1><p id="page-description"></p></div><button id="new-record" class="primary-button" type="button">+ Nueva cita</button></div>
+    <section id="form-panel" class="panel" hidden><h2 id="form-title"></h2><form id="record-form" novalidate><div id="form-fields" class="form-grid"></div><p id="form-error" class="form-error" role="alert"></p><div class="form-actions"><button id="cancel-form" type="button" class="secondary-button">Cancelar</button><button class="primary-button" type="submit">Guardar cita</button></div></form></section>
+    <div class="toolbar"><input id="search" type="search" placeholder="Buscar paciente, médico o fecha..." aria-label="Buscar citas"><button id="print" class="secondary-button" type="button">Imprimir / Guardar PDF</button></div>
+    <div class="table-wrap"><table><thead id="record-head"></thead><tbody id="record-body"></tbody></table></div>
+  </section></main></div>
+  <script src="/bootstrap.js"></script><script src="../core/store.js"></script><script src="../core/crud.js"></script><script src="script.js"></script>
+</body>
+</html>

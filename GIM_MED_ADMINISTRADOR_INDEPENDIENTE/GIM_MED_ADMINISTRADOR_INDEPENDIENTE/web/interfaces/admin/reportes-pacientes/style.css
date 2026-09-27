@@ -1,0 +1,4 @@
+@import url("../style.css");
+
+/* Apariencia de la interfaz de administrador, tarea reportes pacientes: diseño, componentes y ajustes de pantalla. */
+.toolbar{align-items:center}.toolbar .status-badge{margin-left:auto}

@@ -1,0 +1,42 @@
+<!doctype html>
+
+<!-- Pantalla para la interfaz de administrador, tarea planilla: navegación, formularios y paneles de esta tarea. -->
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cálculo mensual de planilla, INSS e IR de GIM-MED">
+  <title>Planilla IR e INSS | GIM-MED</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app"><aside id="app-sidebar" class="sidebar" aria-label="Navegación principal"></aside><main class="main-area"><header id="app-header" class="topbar"></header><section class="content">
+    <div class="page-heading"><div><p class="eyebrow">GESTIÓN FINANCIERA</p><h1>Planilla IR e INSS</h1><p>Cálculo mensual detallado y registro histórico por día, mes y empleado.</p></div><div class="button-row"><button id="save-history" class="secondary-button" type="button">Guardar historial</button><button id="print-payroll" class="primary-button" type="button">Descargar PDF</button></div></div>
+    <section class="payroll-grid">
+      <article class="panel calculator-panel">
+        <h2>Agregar cálculo</h2>
+        <form id="payroll-form" novalidate>
+          <div class="form-grid one-column">
+            <label>Empleado *<input name="employee" list="employees" required><datalist id="employees"></datalist></label>
+            <label>Fecha de cálculo *<input name="date" type="date" required></label>
+            <label>Período (mes) *<input name="period" type="month" required></label>
+            <label>Salario mensual bruto (C$) *<input name="salary" type="number" min="0.01" step="0.01" required></label>
+          </div>
+          <p id="payroll-error" class="form-error" role="alert"></p>
+          <button class="primary-button full-button" type="submit">Calcular y guardar</button>
+        </form>
+        <article class="calculation-preview"><h3>Vista previa del cálculo</h3><dl><div><dt>Salario bruto</dt><dd id="preview-salary">C$0.00</dd></div><div><dt>INSS laboral (7%)</dt><dd id="preview-inss">-C$0.00</dd></div><div><dt>IR mensual</dt><dd id="preview-ir">-C$0.00</dd></div><div><dt>Total deducciones</dt><dd id="preview-deductions">-C$0.00</dd></div><div class="preview-net"><dt>SALARIO NETO</dt><dd id="preview-net">C$0.00</dd></div></dl></article>
+      </article>
+      <div>
+        <section id="payroll-stats" class="stats-grid payroll-stats"></section>
+        <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Período</th><th>Empleado</th><th>Salario bruto</th><th>INSS</th><th>IR</th><th>Deducciones</th><th>Neto</th><th class="no-print">Acción</th></tr></thead><tbody id="payroll-body"></tbody></table></div>
+      </div>
+    </section>
+    <section class="history-panel"><div class="section-title"><div><p class="eyebrow">HISTORIA DE CÁLCULOS</p><h2>Historial de planillas</h2><p>Consulte, cargue y descargue planillas anteriores por día, mes y año.</p></div></div><div class="table-wrap flat"><table><thead><tr><th>Fecha</th><th>Período</th><th>Empleados</th><th>Salarios</th><th>INSS</th><th>IR</th><th>Deducciones</th><th>Neto</th><th>Acciones</th></tr></thead><tbody id="history-body"></tbody></table></div></section>
+    <section class="panel tax-panel">
+      <div class="section-title"><div><p class="eyebrow">TABLA PROFESIONAL DE CÁLCULO</p><h2>Tarifa progresiva anual del IR</h2></div><span class="status-badge">INSS laboral aplicado: 7%</span></div>
+      <div class="table-wrap flat"><table><thead><tr><th>Estrato de renta neta anual</th><th>Impuesto base</th><th>Porcentaje aplicable</th><th>Sobre exceso de</th></tr></thead><tbody><tr><td>Hasta C$100,000</td><td>C$0</td><td>0%</td><td>C$0</td></tr><tr><td>C$100,000.01 – C$200,000</td><td>C$0</td><td>15%</td><td>C$100,000</td></tr><tr><td>C$200,000.01 – C$350,000</td><td>C$15,000</td><td>20%</td><td>C$200,000</td></tr><tr><td>C$350,000.01 – C$500,000</td><td>C$45,000</td><td>25%</td><td>C$350,000</td></tr><tr><td>Más de C$500,000</td><td>C$82,500</td><td>30%</td><td>C$500,000</td></tr></tbody></table></div>
+      <p class="disclaimer">Cálculo informativo: la base anual se obtiene del salario mensual después del INSS y se divide el IR anual entre 12. Verifique topes, exenciones y normativa vigente con un profesional contable.</p>
+    </section>
+  </section></main></div>
+  <script src="/bootstrap.js"></script><script src="../core/store.js"></script><script src="script.js"></script>
+</body>
+</html>

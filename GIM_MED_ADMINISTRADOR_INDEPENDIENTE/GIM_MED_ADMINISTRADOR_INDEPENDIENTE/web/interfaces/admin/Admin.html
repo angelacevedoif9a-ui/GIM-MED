@@ -1,0 +1,49 @@
+<!doctype html>
+
+<!-- Pantalla para la interfaz de administrador: navegación, formularios y paneles de esta tarea. -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Panel administrativo del sistema clínico GIM-MED">
+  <title>Admin | GIM-MED</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-mode">
+  <section id="login-view" class="login-page" aria-labelledby="login-title">
+    <article class="login-card">
+      <img src="assets/logo-gimmed.jpeg" alt="Logo oficial de GIM-MED" class="login-logo">
+      <p class="eyebrow">ACCESO SEGURO</p>
+      <h1 id="login-title">Administración GIM-MED</h1>
+      <p>Ingrese con el usuario y la contraseña asignados por el administrador.</p>
+      <form id="login-form" novalidate>
+        <label>Usuario del sistema<input name="username" autocomplete="username" required></label>
+        <label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label>
+        <p id="login-error" class="form-error" role="alert"></p>
+        <button class="primary-button" type="submit">Ingresar al sistema</button>
+      </form>
+      <small>Acceso exclusivo del administrador</small>
+    </article>
+  </section>
+
+  <div id="admin-view" class="app" hidden>
+    <aside id="app-sidebar" class="sidebar" aria-label="Navegación principal"></aside>
+    <main class="main-area">
+      <header id="app-header" class="topbar"></header>
+      <section class="content">
+        <div class="page-heading"><div><p class="eyebrow">INTELIGENCIA ADMINISTRATIVA</p><h1>Panel analítico GIM-MED</h1><p>Indicadores y gráficas actualizados automáticamente con los registros de cada módulo.</p></div></div>
+        <section id="stats" class="stats-grid" aria-label="Indicadores principales"></section>
+        <section class="charts-grid dashboard-charts">
+          <article class="panel"><h2>Pacientes atendidos por mes</h2><p class="chart-description">Cantidad de citas registradas en la clínica.</p><canvas id="patients-chart" width="680" height="300"></canvas></article>
+          <article class="panel"><h2>Trabajadores por departamento</h2><p class="chart-description">Distribución actual del personal registrado.</p><canvas id="staff-chart" width="680" height="300"></canvas></article>
+          <article class="panel"><h2>Ingresos registrados</h2><p class="chart-description">Evolución de facturas pagadas por mes.</p><canvas id="income-chart" width="680" height="300"></canvas></article>
+          <article class="panel"><h2>Acciones rápidas</h2><div class="quick-grid"><a href="pacientes/index.html">Abrir expedientes</a><a href="citas/index.html">Programar cita</a><a href="facturacion/index.html">Crear factura</a><a href="planilla/index.html">Calcular planilla</a><a href="inventario/index.html">Revisar inventario</a><a href="reportes/index.html">Generar reportes</a></div></article>
+        </section>
+        <article class="panel activity-panel"><h2>Actividad reciente</h2><div id="activity-list" class="activity-list"></div></article>
+      </section>
+    </main>
+  </div>
+  <script src="/bootstrap.js"></script><script src="core/store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

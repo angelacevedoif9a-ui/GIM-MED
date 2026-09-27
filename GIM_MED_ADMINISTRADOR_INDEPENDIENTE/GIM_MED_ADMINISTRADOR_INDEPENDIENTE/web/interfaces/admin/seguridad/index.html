@@ -1,0 +1,19 @@
+<!doctype html>
+
+<!-- Pantalla para la interfaz de administrador, tarea seguridad: navegación, formularios y paneles de esta tarea. -->
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Usuarios, roles y copias de seguridad GIM-MED"><title>Seguridad y respaldo | GIM-MED</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="app"><aside id="app-sidebar" class="sidebar"></aside><main class="main-area"><header id="app-header" class="topbar"></header><section class="content">
+  <div class="page-heading"><div><p class="eyebrow">CONFIGURACIÓN Y SEGURIDAD</p><h1>Seguridad y respaldo</h1><p>El administrador controla usuarios, contraseñas, roles y copias de seguridad.</p></div></div>
+  <nav class="tab-list" aria-label="Secciones de seguridad"><button class="tab active" data-tab="users" type="button">Usuarios y accesos</button><button class="tab" data-tab="backups" type="button">Copias de seguridad</button></nav>
+  <section id="users-tab" class="tab-panel">
+    <div class="page-heading compact"><div><h2>Usuarios del sistema</h2><p>Solo una cuenta administradora puede registrar o eliminar usuarios.</p></div><button id="new-user" class="primary-button" type="button">+ Nuevo usuario</button></div>
+    <section id="user-form-panel" class="panel" hidden><h2>Registrar usuario</h2><form id="user-form" novalidate><div class="form-grid"><label>Nombre completo *<input name="name" required></label><label>Usuario del sistema *<input name="username" autocomplete="off" pattern="[a-zA-Z0-9._-]+" minlength="4" required></label><label>Correo del empleado *<input name="email" type="email" required></label><label>Contraseña temporal *<input name="password" type="password" minlength="8" autocomplete="new-password" required></label><label>Rol *<select name="role" required><option>Médico</option><option>Enfermería</option><option>Farmacéutico</option><option>Personal administrativo</option></select></label><label>Estado *<select name="status" required><option>Activo</option><option>Inactivo</option><option>Bloqueado</option></select></label></div><p class="helper-text">La sesión administrativa actual autoriza el registro; no es necesario volver a escribir la contraseña del administrador.</p><p id="user-error" class="form-error" role="alert"></p><div class="form-actions"><button id="cancel-user" class="secondary-button" type="button">Cancelar</button><button class="primary-button" type="submit">Guardar usuario</button></div></form></section>
+    <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Usuario</th><th>Correo</th><th>Rol</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="users-body"></tbody></table></div>
+  </section>
+  <section id="backups-tab" class="tab-panel" hidden>
+    <div class="page-heading compact"><div><h2>Copias de seguridad</h2><p>Respaldo automático diario a las 9:00 p. m. mientras el sistema permanezca abierto.</p></div><div class="button-row"><button id="backup-now" class="primary-button" type="button">Crear respaldo ahora</button><button id="backup-pdf" class="secondary-button" type="button">Informe PDF</button></div></div>
+    <article class="panel backup-info"><strong>Programación activa</strong><p>Próxima comprobación automática: todos los días a las 21:00. El sistema conserva una copia local recuperable de los datos.</p></article>
+    <div class="table-wrap"><table><thead><tr><th>Fecha y hora</th><th>Tipo</th><th>Registros</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="backups-body"></tbody></table></div>
+  </section>
+</section></main></div><script src="/bootstrap.js"></script><script src="../core/store.js"></script><script src="script.js"></script></body></html>
