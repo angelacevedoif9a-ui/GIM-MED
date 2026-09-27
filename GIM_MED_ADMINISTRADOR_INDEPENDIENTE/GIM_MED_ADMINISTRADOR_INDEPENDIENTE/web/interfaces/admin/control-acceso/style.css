@@ -1,5 +1,0 @@
-@import url("../style.css");
-
-/* Apariencia de la interfaz de administrador, tarea control acceso: diseño, componentes y ajustes de pantalla. */
-.explanation{margin-top:18px;border-left:5px solid var(--teal)}.explanation p{margin:0;color:var(--muted);line-height:1.65}.online{color:var(--teal-dark)}
-.overtime{color:#a66d10;font-weight:900}#access-body td:first-child small{display:block;margin-top:4px;color:var(--muted)}

@@ -1,4 +1,0 @@
-@import url("../style.css");
-
-/* Apariencia de la interfaz de administrador, tarea seguridad: diseño, componentes y ajustes de pantalla. */
-.tab-list{display:flex;gap:7px;width:max-content;max-width:100%;margin-bottom:20px;padding:6px;border:1px solid var(--line);border-radius:15px;background:#fff;overflow:auto}.tab{padding:11px 17px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-weight:800;white-space:nowrap;cursor:pointer}.tab.active{background:var(--navy2);color:#fff}.compact{align-items:center;margin:0 0 16px}.compact h2{margin:0 0 5px;color:var(--navy2)}#user-form-panel{margin-bottom:18px;border-top:4px solid var(--teal)}.button-row{display:flex;gap:9px;flex-wrap:wrap}.backup-info{margin-bottom:18px;background:#effcf8;border-color:#b7eddf}.backup-info p{margin:7px 0 0;color:var(--muted)}@media(max-width:650px){.compact{align-items:flex-start}.tab-list{width:100%}}

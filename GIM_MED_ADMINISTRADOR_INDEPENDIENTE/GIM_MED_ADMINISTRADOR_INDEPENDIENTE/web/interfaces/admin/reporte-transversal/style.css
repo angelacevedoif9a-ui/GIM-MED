@@ -1,4 +1,0 @@
-@import url("../style.css");
-
-/* Apariencia de la interfaz de administrador, tarea reporte transversal: diseño, componentes y ajustes de pantalla. */
-.responsibility-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}.responsibility-grid p{color:var(--muted);line-height:1.6}.tag-list{display:flex;gap:8px;flex-wrap:wrap}.tag-list span,.supervisor{display:inline-block;padding:9px 12px;border-radius:999px;background:#effaf7;color:var(--teal-dark);font-size:12px;font-weight:800}.stock-alert{margin-top:18px;padding:17px;border:1px solid #f1d49a;border-radius:16px;background:#fff8e9;color:#8f6014;line-height:1.6}@media(max-width:800px){.responsibility-grid{grid-template-columns:1fr}}
